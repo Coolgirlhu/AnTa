@@ -44,6 +44,8 @@ class Login {
                     // 如果有回调的地址,则跳转回去
                     if (this.url) {
                         location.href = this.url;
+                    } else {
+                        location.assign('./first.html')
                     }
                 }
 

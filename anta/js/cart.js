@@ -81,7 +81,7 @@ caidanc.children[4].innerHTML = str5
 // 购物车操作
 class Cart {
     constructor() {
-            this.getCartGoods();
+            this.getCartGoods(); //执行异步请求
             // 因为都在cart-list  下   所以给 .cart-list 绑定点击事件,实现委托
             this.$('.cart-list').addEventListener('click', this.dispatch);
             // 给全选按钮绑定点击事件
@@ -181,7 +181,6 @@ class Cart {
         // console.log(this);
         // 点击全选的时候,应该让单个商品的选中框状态,跟随全选
         // console.log(eve.target);
-
         let allStatus = eve.target.checked;
         // console.log(allStatus);
         this.oneCheckGoods(allStatus);
@@ -283,12 +282,11 @@ class Cart {
             }, function() { // 确认的回调函数
                 // console.log(111);
                 // 给后台发送数据,删除记录
-                // 找到ul上对应的商品的id
+                // 找到ul上对应的商品的id  每一条对应一个ul
                 let ul = tar.parentNode.parentNode.parentNode
                 let gId = ul.dataset.id;
                 // 用户id
                 let uId = localStorage.getItem('user_id');
-
                 // console.log(gId, uId);
                 // 必须携待token,后台需要验证
                 const AUTH_TOKEN = localStorage.getItem('token')
@@ -306,6 +304,7 @@ class Cart {
                     //  无刷新删除
                     // 关闭弹出框,且删除对应的ul
                     layer.closeAll();
+                    // 自己删除自己
                     ul.remove();
 
                 })
