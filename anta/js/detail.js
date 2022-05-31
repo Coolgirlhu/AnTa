@@ -191,7 +191,20 @@ class Detail {
             <div class="mask"></div>
             <div class="big">
                 <img src="${data.info.img_big_logo}" alt="">
-            </div>`
+            </div>
+            <div class="detailsimg ">
+            <img src="${data.info.img_big_logo} " alt=" ">
+        </div>
+        <div class="detailsimg ">
+            <img src="${data.info.img_big_logo} " alt=" ">
+        </div>
+        <div class="detailsimg ">
+            <img src="${data.info.img_big_logo} " alt=" ">
+        </div>
+        <div class="detailsimg ">
+            <img src="${data.info.img_big_logo} " alt=" ">
+        </div>
+            `
 
             this.$('.middle').innerHTML = html;
             // 放大镜实现
@@ -319,6 +332,14 @@ class Detail {
             this.$('.dropDowncart .cartword').style.display = 'none';
             this.$('.dropDowncart .jixugouwu').style.display = 'block';
             this.$('.dropDowncart .jiesuan').style.display = 'block';
+            // 设置鼠标悬停事件
+            this.$('.dropDowncart').onmouseover = () => {
+                this.$('.dropContentcart').style.display = 'block'
+            }
+
+            this.$('.dropContentcart').onmouseout = () => {
+                this.$('.dropContentcart').style.display = 'none'
+            }
         })
     }
 

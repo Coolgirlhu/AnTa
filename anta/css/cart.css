@@ -1181,6 +1181,12 @@ ul.send-detail li {
     cursor: pointer;
 }
 
+.dropBtncart {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
 .dropDowncart {
     position: relative;
     display: inline-block;
@@ -1196,6 +1202,7 @@ ul.send-detail li {
     box-shadow: 0 2px 36px 0 rgba(0, 0, 0, 0.07);
     border-radius: 8px 0 8px 8px;
     right: 0;
+    overflow: auto;
 }
 
 .dropDowncart:hover .dropBtncart {
@@ -1236,6 +1243,30 @@ ul.send-detail li {
     left: 15px;
 }
 
+.dropContentcart .list {
+    width: 460px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropContentcart .list img {
+    width: 150px;
+    height: 150px;
+    display: block;
+    float: left;
+}
+
+.dropContentcart .txt {
+    width: 250px;
+    float: left;
+}
+
+.dropContentcart .num {
+    width: 100px;
+    float: right;
+    margin-top: 50px;
+}
+
 .dropContentcart .cartword {
     text-align: center;
     display: inline-block;
@@ -1252,4 +1283,61 @@ ul.send-detail li {
 
 .ano {
     text-align: center;
+}
+
+.dropDowncart .jiesuan {
+    position: relative;
+    bottom: 0;
+    float: left;
+    margin-top: 50px;
+    display: none;
+}
+
+.dropDowncart .jiesuan img {
+    display: block;
+    float: left;
+    width: 40px;
+    height: 32px;
+    margin-left: 50px;
+}
+
+.dropDowncart .jiesuan a {
+    font-size: 20px;
+    background-color: rgb(237, 125, 125);
+    line-height: 30px;
+    width: 230px;
+    height: 30px;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    color: white;
+}
+
+.dropDowncart .jixugouwu {
+    position: relative;
+    bottom: 0;
+    float: left;
+    width: 230px;
+    margin-top: 50px;
+    display: none;
+}
+
+.dropDowncart .jixugouwu img {
+    display: block;
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-left: 50px;
+}
+
+.dropDowncart .jixugouwu a {
+    font-size: 20px;
+    background-color: rgb(235, 201, 201);
+    line-height: 30px;
+    width: 230px;
+    height: 30px;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    color: white;
 }

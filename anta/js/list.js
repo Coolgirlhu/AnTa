@@ -112,29 +112,50 @@
              data.list.forEach(goods => {
                  // console.log(goods);
                  html += `<li class="sk_goods" data-id="${goods.goods_id}">
-        <a href="javascript:void(0)">
-            <img src="${goods.img_big_logo}" alt="" class="img">
-        </a>
-        <h5 class="sk_goods_title">${goods.title}</h5>
-        <p class="sk_goods_price">
-            <em>¥${goods.current_price}</em>
-            <del>￥${goods.price}</del>
-        </p>
-        <div class="sk_goods_progress">
-            已售
-            <i>${goods.sale_type}</i>
-            <div class="bar">
-                <div class="bar_in"></div>
-            </div>
-            剩余
-            <em>29</em>件
-        </div>
-        <a href="javascript:void(0)" class="sk_goods_buy">立即抢购</a>
-    </li>`;
+         <a href="javascript:void(0)">
+             <img src="${goods.img_big_logo}" alt="" class="img">
+         </a>
+         <h5 class="sk_goods_title">${goods.title}</h5>
+         <p class="sk_goods_price">
+             <em>¥${goods.current_price}</em>
+             <del>￥${goods.price}</del>
+         </p>
+         <div class="sk_goods_progress">
+             已售
+             <i>${goods.sale_type}</i>
+             <div class="bar">
+                 <div class="bar_in"></div>
+             </div>
+             剩余
+             <em>29</em>件
+         </div>
+         <a href="javascript:void(0)" class="sk_goods_buy">立即抢购</a>
+     </li>`;
              });
              // console.log(html);
              // 将拼接好的字符串,追加到ul中
              this.$('.sk_bd ul').innerHTML += html;
+             //  //  fenye() 
+             //  let node = document.querySelectorAll('.sk_page a');
+             //  let currentPage = 1;
+             //  //  console.log(node);
+             //  node.forEach((li, index) => {
+             //      //  console.log(li, index)
+             //      li.onclick = function() {
+             //          //  console.log(li);
+             //          if (!li.className) {
+             //              node[index].className = 'current'
+
+             //              node[index - 1].className = ''
+             //              node[index + 1].className = ''
+             //                  ++this.currentPage
+
+             //          }
+             //      }
+             //  });
+
+
+
          }
          // 加入购物车
      checkLogin(eve) {
@@ -174,30 +195,40 @@
          this.gouwuche()
      }
      gouwuche() {
-         // console.log(gId, uId);
-         // let gouwuche = document.querySelector('.dropDowncart')
-         let gId = localStorage.getItem('gId');
-         axios.get('http://localhost:8888/goods/item/' + `${gId}`).then(({ data }) => {
-             // console.log(status);
-             console.log(data);
-             console.log(data.info.goods_id);
-             let html = '';
-             html += `
+             // console.log(gId, uId);
+             // let gouwuche = document.querySelector('.dropDowncart')
+             let gId = localStorage.getItem('gId');
+             axios.get('http://localhost:8888/goods/item/' + `${gId}`).then(({ data }) => {
+                 // console.log(status);
+                 //  console.log(data);
+                 //  console.log(data.info.goods_id);
+                 let html = '';
+                 html += `
             <li>
                 <a href="" class="pic"><img src="${data.info.img_big_logo}"></a>
                 <div class="txt">${data.info.title}</div>
                 <div class="num">
                     <h4>¥${data.info.price}</h4>
                 </div>`;
-             // 将数据追加到页面
-             this.$('.dropDowncart .list').innerHTML += html;
-             this.$('.dropDowncart .carthome').style.display = 'none';
-             this.$('.dropDowncart .cartword').style.display = 'none';
-             this.$('.dropDowncart .jixugouwu').style.display = 'block';
-             this.$('.dropDowncart .jiesuan').style.display = 'block';
-         })
-     }
+                 // 将数据追加到页面
+                 this.$('.dropDowncart .list').innerHTML += html;
+                 this.$('.dropDowncart .carthome').style.display = 'none';
+                 this.$('.dropDowncart .cartword').style.display = 'none';
+                 this.$('.dropDowncart .jixugouwu').style.display = 'block';
+                 this.$('.dropDowncart .jiesuan').style.display = 'block';
+                 //    获取购物车图标的节点
+                 this.$('.dropDowncart').onmouseover = () => {
+                     this.$('.dropContentcart').style.display = 'block'
+                 }
 
+                 this.$('.dropContentcart').onmouseout = () => {
+                     this.$('.dropContentcart').style.display = 'none'
+                 }
+             })
+         }
+         //  fenye() {
+
+     //  }
      addCartGoods(gId, uId) {
              //  console.log(gId, uId);
              /* 给添加购物车接口,发送请求 调用购物车接口,后台要验证是否为登录状态,需要传递token
@@ -265,6 +296,7 @@
                          this.lock = false;
                      }, 1000)
                      // console.log(1111);
+                     //  传递当千页码数
                  this.getData(++this.currentPage)
              }
          }

@@ -545,11 +545,20 @@ em {
     cursor: pointer;
 }
 
+
+/* .dropBtncart:hover .dropContentcart{
+    display: block;
+} */
+
 .dropDowncart {
     margin: 0;
     position: relative;
     display: inline-block;
     z-index: 120;
+}
+
+.dropDowncart:hover .dropContentcart {
+    display: block;
 }
 
 .dropContentcart {

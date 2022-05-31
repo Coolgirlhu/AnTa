@@ -86,7 +86,7 @@ class Cart {
             this.$('.cart-list').addEventListener('click', this.dispatch);
             // 给全选按钮绑定点击事件
             this.$('.cart-th input').addEventListener('click', this.checkAll);
-
+            this.gouwuche()
         }
         // 事件委托函数
     dispatch = (eve) => {
@@ -111,16 +111,16 @@ class Cart {
             let sum = ul.querySelector('.sum');
             let price = ul.querySelector('.price').innerHTML - 0;
             // console.log(num, sum, price);
-
-            // 获取数量
+            // 获取数量value值
             let numVal = num.value;
             // 对数量进行加1 操作
             numVal++;
-            // console.log(num);
+            // console.log(numVal);
             // 更新input中的数量
-            // 给 服务器发送数据,增加数量
+            // 给 服务器发送数据,增加数量  必须携token 
             const AUTH_TOKEN = localStorage.getItem('token')
             axios.defaults.headers.common['authorization'] = AUTH_TOKEN;
+            // 设置请求头
             axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
             let uId = localStorage.getItem('user_id');
             let gId = ul.dataset.id;
@@ -251,7 +251,7 @@ class Cart {
                 let ul = input.parentNode.parentNode;
                 // console.log(ul);
 
-                // 获取数量和小计
+                // 获取数量和小计  字符串转化数字类型
                 let tmpNum = ul.querySelector('.itxt').value - 0;
                 let tmpSum = ul.querySelector('.sum').innerHTML - 0;
                 // console.log(tmpNum, tmpSum);
@@ -261,8 +261,7 @@ class Cart {
 
 
         });
-        //     // 保留小数点后两位
-
+        // 保留小数点后两位
         sum = parseInt(sum * 100) / 100
             // console.log(sum, num);
 
@@ -382,6 +381,51 @@ class Cart {
             location.assign('./login.html?ReturnUrl=./cart.html')
         }
 
+    }
+    async gouwuche() {
+        // console.log(gId, uId);
+        // let gouwuche = document.querySelector('.dropDowncart')
+        let gId = localStorage.getItem('user_id');
+
+        const AUTH_TOKEN = localStorage.getItem('token')
+        axios.defaults.headers.common['authorization'] = AUTH_TOKEN;
+        let { data, status } = await axios.get('http://localhost:8888/cart/list', {
+                params: {
+                    id: localStorage.getItem('user_id')
+                }
+            })
+            // console.log(status);
+        console.log(data.cart);
+        console.log(data);
+        let html = '';
+        data.cart.forEach(goods => {
+            console.log(goods);
+            html = `
+           <li>
+               <a href="" class="pic"><img src="${goods.img_small_logo}"></a>
+               <div class="txt">${goods.title}</div>
+               <div class="num">
+                   <h4>¥${goods.price}</h4>
+               </div>
+                 </li>`;
+            //将数据追加到页
+            console.log(this.$('.dropDowncart .list'));
+            this.$('.dropDowncart .list').innerHTML += html;
+            this.$('.dropDowncart .carthome').style.display = 'none';
+            this.$('.dropDowncart .cartword').style.display = 'none';
+            this.$('.dropDowncart .jixugouwu').style.display = 'block';
+            this.$('.dropDowncart .jiesuan').style.display = 'block';
+
+            //    获取购物车图标的节点
+            this.$('.dropDowncart').onmouseover = () => {
+                this.$('.dropContentcart').style.display = 'block'
+            }
+
+            this.$('.dropContentcart').onmouseout = () => {
+                this.$('.dropContentcart').style.display = 'none'
+            }
+
+        })
     }
     $(ele) {
         let res = document.querySelectorAll(ele);
